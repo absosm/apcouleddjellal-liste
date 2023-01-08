@@ -64,7 +64,7 @@
               </div>
             </div>
             <div class="form-group row">
-              <button class="ladda-button lbtn-add btn btn-primary btn-rounded btn-block" type="submit"> تأكد <i class="fa fa-check"></i>
+              <button class="ladda-button lbtn btn btn-primary btn-rounded btn-block" type="submit"> تأكد <i class="fa fa-check"></i>
               </button>
             </div>
           </form>
@@ -119,6 +119,8 @@
         $('#verif_ramadan').on('submit', function (e) {
           if (!e.isDefaultPrevented()) { 
             e.preventDefault();
+            const l = $( '.lbtn' ).ladda();
+            l.ladda( 'start' );
             verif_ramadan().then(result=>{
               swal({
                 title: "أنت مسجل!",
@@ -134,8 +136,10 @@
                     window.location.href = '.';
                 }
               });
+              l.ladda( 'stop' );
             }).catch(errors=>{
               swal(" للأسف !", `أنت غير مؤهل للاستفادة من المنحة التضامنية رمضان 2023`, "error");
+              l.ladda( 'stop' );
             })
           }
         });
